@@ -1,30 +1,5 @@
 @import "tailwindcss";
 
-/* :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
-} */
-
 :root {
   --background: #ffffff;
   --foreground: #171717;
@@ -39,8 +14,10 @@ body {
   --color-primary: #1B1B1B;
   --color-secondary: #575757;
   --color-background: #F9F9F9;
+
   --color-red: #DE2027;
   --color-red-stroke: #C2151B;
+
   --color-gray: #414141
 }
 
@@ -50,5 +27,4 @@ body {
 
 .btn-ghost {
   @apply bg-white text-gray border-none rounded-full inline-flex items-center justify-center cursor-pointer font-medium text-base;
-
 }
