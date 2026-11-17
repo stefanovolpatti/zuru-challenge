@@ -1,17 +1,11 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-body {
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
-  scroll-behavior: smooth;
-}
-
 @theme {
+  /* Breakpoints from the brief: mobile < 810px, tablet 810–1199px, desktop ≥ 1200px.
+     Kept in rem like Tailwind's defaults so the variants stay correctly ordered. */
+  --breakpoint-md: 50.625rem; /* 810px */
+  --breakpoint-lg: 75rem; /* 1200px */
+
   --color-primary: #1B1B1B;
   --color-secondary: #575757;
   --color-background: #F9F9F9;
@@ -20,17 +14,32 @@ body {
   --color-red-stroke: #C2151B;
 
   --color-gray: #414141;
-  --color-gray-secondary: #575757;
+  --color-gray-stroke: #E8E8E8;
 }
 
-.btn-red {
-  @apply bg-red text-white border border-red-stroke py-2 px-4 rounded-full inline-flex items-center justify-center cursor-pointer font-medium text-base;
+body {
+  background: #ffffff;
+  font-family: Arial, Helvetica, sans-serif;
+  scroll-behavior: smooth;
 }
 
-.btn-ghost {
-  @apply bg-white text-gray border-none rounded-full inline-flex items-center justify-center cursor-pointer font-medium text-base;
-}
+/* Buttons: one shared base plus one class per variant (see Button.tsx).
+   They sit in the components layer so a utility passed through `className`
+   (for example `w-full`) can still override them. */
+@layer components {
+  .btn {
+    @apply inline-flex w-fit cursor-pointer items-center justify-center rounded-full text-base font-medium focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary;
+  }
 
-.btn-neutral {
-  @apply bg-white text-gray rounded-full py-2 px-4 inline-flex items-center justify-center cursor-pointer font-medium text-base border border-[#E8E8E8];
+  .btn-red {
+    @apply border border-red-stroke bg-red px-4 py-2 text-white;
+  }
+
+  .btn-ghost {
+    @apply border-none bg-white text-gray;
+  }
+
+  .btn-neutral {
+    @apply border border-gray-stroke bg-white px-4 py-2 text-gray;
+  }
 }

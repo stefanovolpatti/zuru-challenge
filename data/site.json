@@ -1,0 +1,28 @@
+{
+  "navigation": [
+    { "label": "Kitchen", "href": "/#kitchen" },
+    { "label": "Home Security", "href": "/#home-security" },
+    { "label": "Hair Care", "href": "/#hair-care" },
+    { "label": "Accessories", "href": "/#accessories" }
+  ],
+  "headerCta": { "label": "Where to buy", "href": "/where-to-buy" },
+  "footerColumns": [
+    {
+      "title": "Our Products",
+      "grid": true,
+      "links": [
+        { "label": "Kitchen", "href": "/#kitchen" },
+        { "label": "Hair Care", "href": "/#hair-care" },
+        { "label": "Home Security", "href": "/#home-security" },
+        { "label": "Accessories", "href": "/#accessories" }
+      ]
+    },
+    {
+      "title": "Learn",
+      "links": [
+        { "label": "Where to buy", "href": "/where-to-buy" },
+        { "label": "Contact Us", "href": "/contact" }
+      ]
+    }
+  ]
+}

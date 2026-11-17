@@ -1,0 +1,34 @@
+[
+  {
+    "id": "kitchen",
+    "name": "Kitchen",
+    "tagline": "Powerful appliances for everyday cooking",
+    "tileImage": "/images/products/blender.png",
+    "tileImageAlt": "Octopus portable blender",
+    "layout": "feature-top"
+  },
+  {
+    "id": "home-security",
+    "name": "Home Security",
+    "tagline": "Home feels safer when you're always in the loop",
+    "tileImage": "/images/products/indoor-camera.png",
+    "tileImageAlt": "Octopus indoor camera",
+    "layout": "feature-side"
+  },
+  {
+    "id": "hair-care",
+    "name": "Hair Care",
+    "tagline": "Faster drying, smoother results",
+    "tileImage": "/images/products/hair-dryer.png",
+    "tileImageAlt": "Octopus ionic hair dryer",
+    "layout": "row"
+  },
+  {
+    "id": "accessories",
+    "name": "Accessories",
+    "tagline": "The little things that make everything work better",
+    "tileImage": "/images/products/usb-c-cable.png",
+    "tileImageAlt": "Octopus braided USB-C cable",
+    "layout": "row"
+  }
+]

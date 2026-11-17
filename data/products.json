@@ -1,0 +1,94 @@
+[
+  {
+    "id": "kettle",
+    "slug": "kettle",
+    "name": "Octopus Kettle 1.7 L",
+    "category": "kitchen",
+    "shortDescription": "A 1.7 L kettle that boils fast on 1800W, with a body that stays cool to the touch",
+    "image": "/images/banners/hair-dryer-desktop.png",
+    "imageAlt": "Pouring hot water from the Octopus Kettle into a cup",
+    "featured": true,
+    "bestSeller": false
+  },
+  {
+    "id": "blender",
+    "slug": "blender",
+    "name": "Octopus Blender",
+    "category": "kitchen",
+    "shortDescription": "A portable blender that blends straight into a cup you can take with you",
+    "image": "/images/products/blender.png",
+    "imageAlt": "Octopus portable blender",
+    "bestSeller": false
+  },
+  {
+    "id": "countertop-blender",
+    "slug": "countertop-blender",
+    "name": "Octopus Countertop Blender",
+    "category": "kitchen",
+    "shortDescription": "A powerful blender that crushes ice and blends smooth with seven presets",
+    "image": "/images/products/countertop-blender.png",
+    "imageAlt": "Octopus countertop blender",
+    "bestSeller": false
+  },
+  {
+    "id": "indoor-camera",
+    "slug": "indoor-camera",
+    "name": "Octopus Indoor Camera",
+    "category": "home-security",
+    "shortDescription": "A 2K indoor camera that pans to cover the whole room and tracks movement as it happens",
+    "image": "/images/products/indoor-camera.png",
+    "imageAlt": "Octopus indoor camera",
+    "featured": true,
+    "bestSeller": false
+  },
+  {
+    "id": "outdoor-camera",
+    "slug": "outdoor-camera",
+    "name": "Octopus Outdoor Camera",
+    "category": "home-security",
+    "shortDescription": "An outdoor camera that runs on solar power and records in 3K",
+    "image": "/images/products/outdoor-camera.png",
+    "imageAlt": "Octopus outdoor camera on its wall mount",
+    "bestSeller": false
+  },
+  {
+    "id": "video-doorbell",
+    "slug": "video-doorbell",
+    "name": "Octopus Video Doorbell",
+    "category": "home-security",
+    "shortDescription": "A 2K video doorbell that lets you answer from your phone",
+    "image": "/images/products/video-doorbell.png",
+    "imageAlt": "Octopus video doorbell",
+    "bestSeller": false
+  },
+  {
+    "id": "power-bank",
+    "slug": "power-bank",
+    "name": "Octopus Power Bank 10,000 mAh",
+    "category": "accessories",
+    "shortDescription": "A slim power bank with the USB-C cable already built in",
+    "image": "/images/products/power-bank.png",
+    "imageAlt": "Octopus power bank with its built-in USB-C cable",
+    "bestSeller": false
+  },
+  {
+    "id": "power-board",
+    "slug": "power-board",
+    "name": "Octopus Power Board with USB Charging",
+    "category": "accessories",
+    "shortDescription": "A compact power board with four sockets and four USB ports",
+    "image": "/images/products/power-board.png",
+    "imageAlt": "Octopus power board with USB ports",
+    "bestSeller": false
+  },
+  {
+    "id": "charging-station",
+    "slug": "charging-station",
+    "name": "Octopus 3-in-1 Magnetic Charging Station",
+    "category": "accessories",
+    "shortDescription": "A Qi2 stand that charges your phone, watch and earbuds at the same time",
+    "image": "/images/products/charging-station.png",
+    "imageAlt": "Octopus 3-in-1 magnetic charging station",
+    "bestSeller": false
+  }
+]

@@ -1,0 +1,58 @@
+{
+  "sections": [
+    {
+      "id": "kitchen",
+      "type": "category",
+      "category": "kitchen",
+      "cta": {
+        "label": "Explore all products",
+        "variant": "neutral"
+      }
+    },
+    {
+      "id": "hair-dryer-banner",
+      "type": "banner",
+      "title": "Octopus Ionic Hair Dryer",
+      "subtitle": "Dry your hair faster and with less frizz with this powerful ionic hair dryer",
+      "image": "/images/banners/hair-dryer-desktop.png",
+      "mobileImage": "/images/banners/hair-dryer-mobile.png",
+      "cta": {
+        "label": "Learn more",
+        "variant": "red"
+      }
+    },
+    {
+      "id": "home-security",
+      "type": "category",
+      "category": "home-security",
+      "cta": {
+        "label": "Explore all products",
+        "variant": "neutral"
+      }
+    },
+    {
+      "id": "accessories",
+      "type": "category",
+      "category": "accessories",
+      "cta": {
+        "label": "Explore all products",
+        "variant": "neutral"
+      }
+    },
+    {
+      "id": "explore-categories",
+      "type": "category-tiles",
+      "title": "Explore all categories"
+    },
+    {
+      "id": "store-banner",
+      "type": "banner",
+      "title": "Find us at the warehouse",
+      "image": "/images/banners/store.png",
+      "cta": {
+        "label": "Find your nearest store",
+        "variant": "neutral"
+      }
+    }
+  ]
+}
