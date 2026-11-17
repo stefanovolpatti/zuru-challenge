@@ -1,6 +1,6 @@
 // TODO: check accessibility rules for the button
 
-interface ButtonProps {
+export interface ButtonProps {
   label: string;
   type: "ghost" | "red" | "neutral";
 }

@@ -1,15 +1,15 @@
 
 import { StaticImageData } from "next/image";
-import Button from "../button/Button";
+import Button, { ButtonProps } from "../button/Button";
 
 interface BannerProps {
     title: string;
-    subtitle: string;
+    subtitle?: string;
     image: StaticImageData;
     mobileImage?: StaticImageData;
     cta: {
-        label: string;
-        href: string;
+        label: ButtonProps['label'];
+        buttonType?: ButtonProps['type']
     };
     className?: string;
     textColor?: string;
@@ -20,7 +20,11 @@ const Banner = ({
     subtitle,
     image,
     mobileImage,
-    cta,
+    cta: {
+        label = "",
+        buttonType = "red"
+
+    },
     className = "text-primary",
     textColor,
 }: BannerProps) => {
@@ -79,7 +83,7 @@ const Banner = ({
                         {subtitle}
                     </span>
 
-                    <Button type="red" label={cta.label} />
+                    <Button type={buttonType} label={label} />
                 </div>
             </div>
         </section>

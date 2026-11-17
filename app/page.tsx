@@ -4,6 +4,7 @@ import Header from "@/components/ui/header/Header";
 
 import HeroImage from "../assets/images/Breakpoint=Desktop.png"
 import HeroImageMobile from "../assets/images/Category=Hair Care, Breakpoint=_ 810 px.png"
+import Card, { CardProps } from "@/components/ui/card/Card";
 
 
 import { PageSection } from "@/components/page-section/PageSection";
@@ -14,6 +15,17 @@ import CountertopBlanderImage from "@/assets/images/Product Card/Frame 112.png"
 
 import PowerBoardImage from "@/assets/images/Product Card/Frame 112-14.png"
 import MagneticChargerStationImage from "@/assets/images/Product Card/Frame 112-15.png"
+
+
+import SecurityCameraImage from "@/assets/images/security camera-1.png"
+import OutdoorCameraImage from "@/assets/images/Product Card/Frame 112-6.png"
+import DoorbellCameraImage from "@/assets/images/Product Card/Frame 112-5.png"
+
+import HairCareImage from "@/assets/images/Product Card/Frame 112-7.png"
+import WireImage from "@/assets/images/Product Card/Frame 112-8.png"
+
+import RedBannerImage from "@/assets/images/49bd8e22e90232affb0c405a7b5a405e4a6d8c5e.png"
+
 
 export default function Home() {
 
@@ -100,7 +112,64 @@ export default function Home() {
     },
   ];
 
+  const homeSecurityProducts: ProductCardProps[] = [
+    {
+      title: "Octopus Indoor Camera",
+      description: "A 2K indoor camera that pans to cover the whole room and tracks movement as it happens",
+      image: SecurityCameraImage,
+      imageAlt: "The indoor camera",
+      href: "/products/magnetic-station",
+      layout: "stacked-center",
+    },
+
+    {
+      title: "Octopus Outdoor Camera",
+      description: "An outdoor camera that runs on solar power and records in 3K",
+      image: OutdoorCameraImage,
+      imageAlt: "The Outdoor Camera",
+      href: "/products/power-board",
+      layout: "split",
+    },
+    {
+      title: "Octopus Video Doorbell",
+      description: "A 2K video doorbell that lets you answer from your phone",
+      image: DoorbellCameraImage,
+      imageAlt: "The Video Doorbell",
+      href: "/products/magnetic-station",
+      layout: "split",
+    },
+  ];
+
+  const allCategoriesProducts: CardProps[] = [
+    {
+      variant: "category",
+      label: 'Kitchen',
+      image: BlanderImage,
+      imageAlt: 'Blander image'
+    },
+    {
+      variant: "category",
+      label: 'Home Security',
+      image: SecurityCameraImage,
+      imageAlt: 'Home security image'
+    },
+    {
+      variant: "category",
+      label: 'Hair Care',
+      image: HairCareImage,
+      imageAlt: 'Hair Care image'
+    },
+    {
+      variant: "category",
+      label: 'Accessories',
+      image: WireImage,
+      imageAlt: 'Wire image'
+    }
+  ]
+
+
   const [hero, ...rest] = kitchenProducts;
+  const [left, ...data] = homeSecurityProducts;
 
   return (
     <>
@@ -134,17 +203,50 @@ export default function Home() {
         subtitle="Dry your hair faster and with less frizz with this powerful ionic hair dryer"
         cta={{
           label: "Learn more",
-          href: "/products",
         }}
       />
 
+      <PageSection title="Home Security" description="Home feels safer when you're always in the loop" id="home-security">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-6 p-4">
+          <div className="row-span-1 md:row-span-2">
+            <ProductCard {...left} className="md:col-span-2 md:h-screen" />
+          </div>
+          <div className="flex flex-col gap-4 md:h-screen">
+            {data.map((p) => (
+              <ProductCard key={p.title} {...p} className="w-full md:h-full" />
+            ))}
+          </div>
+        </div>
+      </PageSection>
+
       <PageSection title="Accessories" description="The little things that make everything work better" id="accessories">
-        <section className="flex flex-col md:flex-row gap-6 p-4 ">
+        <section className="flex flex-col md:flex-row gap-6 p-4">
           {accessoriesProducts.map((p) => (
             <ProductCard key={p.title} {...p} className="w-full" />
           ))}
         </section>
       </PageSection>
+
+      <div className="lg:mx-[128px] my-[180px] p-4 lg:p-0">
+        <h5 className="text-primary font-bold text-3xl mb-8">Explore all categories</h5>
+        <section className="grid grid-cols-2 gap-6 md:grid-cols-4">
+          {allCategoriesProducts.map((p) => (
+            <Card key={p.imageAlt} {...p} />
+          ))}
+        </section>
+      </div>
+
+
+      <Banner
+        image={RedBannerImage}
+        mobileImage={RedBannerImage}
+        title="Find us at the warehouse"
+        cta={{
+          label: "Find your nearest store",
+          buttonType: "neutral"
+        }}
+      />
+
 
       <Footer
         columns={footerColumns}
