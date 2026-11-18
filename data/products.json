@@ -28,7 +28,61 @@
     "shortDescription": "A powerful blender that crushes ice and blends smooth with seven presets",
     "image": "/images/products/countertop-blender.png",
     "imageAlt": "Octopus countertop blender",
-    "bestSeller": false
+    "bestSeller": false,
+    "colours": [
+      {
+        "name": "Graphite",
+        "value": "#2B2B2B"
+      },
+      {
+        "name": "Cream",
+        "value": "#EDE6DA"
+      }
+    ],
+    "features": [
+      {
+        "title": "Powers through the tough stuff",
+        "body": "A 1500 W motor crushes ice and frozen fruit without stalling.",
+        "image": "/images/products/blender/blender-1.jpg",
+        "imageAlt": "Octopus countertop blender on the kitchen bench",
+        "wide": true
+      },
+      {
+        "title": "Skip the scrubbing",
+        "body": "Add water and a little detergent, press clean, and the blender cleans itself",
+        "image": "/images/products/countertop-blender.png",
+        "imageAlt": "Front panel of the countertop blender"
+      },
+      {
+        "title": "Control in short burst",
+        "body": "The pulse function runs the blades in bursts, giving you even more control",
+        "image": "/images/products/blender/blender-2.jpg",
+        "imageAlt": "Blending a smoothie in the countertop blender"
+      },
+      {
+        "title": "A preset for the everyday",
+        "body": "Seven intelligent presets for smoothies, soups, purées & more",
+        "image": "/images/products/blender/blender-3.webp",
+        "imageAlt": "Preset buttons on the countertop blender",
+        "wide": true
+      }
+    ],
+    "specs": [
+      {
+        "title": "Technical specifications",
+        "items": [
+          "Power: 1500W",
+          "Voltage: 220–240 V",
+          "Frequency: 50/60 Hz"
+        ]
+      }
+    ],
+    "downloads": [
+      {
+        "label": "User manual (PDF)",
+        "href": "#"
+      }
+    ]
   },
   {
     "id": "indoor-camera",

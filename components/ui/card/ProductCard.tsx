@@ -46,10 +46,12 @@ const layouts: Record<ProductCardLayout, LayoutClasses> = {
 export type ProductCardProps = {
   product: Product;
   layout?: ProductCardLayout;
+  /** Hide the call-to-action button. Defaults to showing it. */
+  cta?: boolean;
   className?: string;
 };
 
-export function ProductCard({ product, layout = "split", className }: ProductCardProps) {
+export function ProductCard({ product, layout = "split", cta = true, className }: ProductCardProps) {
   const classes = layouts[layout];
 
   return (
@@ -61,15 +63,15 @@ export function ProductCard({ product, layout = "split", className }: ProductCar
       )}
     >
       <div className={classes.text}>
-        <h3 className="text-2xl font-medium text-neutral-900 md:text-3xl">
-          {product.name}
-        </h3>
+        <h3 className="text-2xl font-medium text-neutral-900 md:text-3xl">{product.name}</h3>
         <p className="mt-3 text-neutral-600">{product.shortDescription}</p>
 
-        <Button href={`/products/${product.slug}`} variant="red" className="mt-6">
-          Learn more
-          <span className="sr-only"> about {product.name}</span>
-        </Button>
+        {cta && (
+          <Button href={`/products/${product.slug}`} variant="red" className="mt-6">
+            Learn more
+            <span className="sr-only"> about {product.name}</span>
+          </Button>
+        )}
       </div>
 
       <div className={classes.media}>

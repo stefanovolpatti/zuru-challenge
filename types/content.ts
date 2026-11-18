@@ -26,8 +26,10 @@ export type Product = {
   /** The featured product gets the large card of its category section. */
   featured?: boolean;
   bestSeller: boolean;
-  colours?: string[];
+  colours?: ProductColour[];
+  features?: ProductFeature[];
   specs?: { title: string; items: string[] }[];
+  downloads?: ProductDownload[];
 };
 
 /** How a category section arranges its product cards. */
@@ -67,4 +69,25 @@ export type SiteContent = {
   navigation: LinkItem[];
   headerCta: LinkItem;
   footerColumns: FooterColumn[];
+};
+
+export type ProductFeature = {
+  title: string;
+  body?: string;
+  /** Path under /public. Cards without an image render as text-only. */
+  image?: string;
+  imageAlt?: string;
+  /** Spans both columns of the feature grid on md+. */
+  wide?: boolean;
+};
+
+export type ProductColour = {
+  name: string;
+  /** CSS color used for the swatch, e.g. "#2B2B2B". */
+  value: string;
+};
+
+export type ProductDownload = {
+  label: string;
+  href: string;
 };

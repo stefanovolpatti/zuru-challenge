@@ -46,3 +46,7 @@ export function getProductsByCategory(id: CategoryId): Product[] {
 export function getProductBySlug(slug: string): Product | undefined {
   return products.find((product) => product.slug === slug);
 }
+
+export function getAllProducts(): Product[] {
+  return products;
+}
