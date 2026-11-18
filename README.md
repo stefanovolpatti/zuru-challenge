@@ -51,7 +51,7 @@ Conventions: test behaviour, not markup; no snapshots; E2E stays limited to crit
 | Product Detail Page | Done (hero, feature grid, spec accordions, downloads, best-sellers carousel) |
 | Tests (component and end-to-end) | Done |
 | SEO and Open Graph tags | Not started |
-| Deployment and Lighthouse reports | Not started |
+| Deployment and Lighthouse reports | Partially |
 
 ## Architecture
 
@@ -125,3 +125,42 @@ Why it is built this way:
 - **Product page:** the hero CTA was a `<button>` with no `href` (dead on click) — it now links to `/where-to-buy`. The page had no `<h1>`, the hero image forced `min-h-[900px]` over its aspect ratio, the grid mixed `lg:` columns with `md:` spans, and `DownloadsRow` had drifted inside the Specifications landmark. `ProductCard` also lost the speculative props (`titleAs`, `ctaLabel`, `ctaHref`, `children`) added for a reuse that was later reworked; only `cta` remains, because the feature grid calls it.
 - **Styles:** breakpoints were Tailwind's defaults and are now the brief's. Three button classes that repeated the same base were split into a base plus variants. Unused Geist font loading was removed.
 
+## Lighthouse results
+## Lighthouse Results
+
+Audits were run with Chrome DevTools Lighthouse on the homepage and the product page, for both desktop and mobile.
+
+| Page | Device | Performance | Accessibility | Best Practices | SEO |
+|---|---|---|---|---|---|
+| Homepage | Mobile | 90 | 100 | 96 | 100 |
+| Homepage | Desktop | 100 | 100 | 96 | 100 |
+| Product page | Mobile | 100 | 98 | 96 | 100 |
+| Product page | Desktop | 100 | 98 | 96 | 100 |
+
+### Core Web Vitals
+
+| Page | Device | FCP | LCP | TBT | CLS | Speed Index |
+|---|---|---|---|---|---|---|
+| Homepage | Mobile | 0.8 s | 3.7 s | 40 ms | 0 | 0.8 s |
+| Homepage | Desktop | 0.2 s | 0.8 s | 0 ms | 0 | 0.2 s |
+| Product page | Mobile | 0.8 s | 1.9 s | 30 ms | 0 | 0.8 s |
+| Product page | Desktop | 0.2 s | 0.6 s | 0 ms | 0 | 0.2 s |
+
+### Requirements check
+
+- **Performance (Homepage, mobile) ≥ 90:** met, with a score of 90.
+- **Accessibility ≥ 90:** met on every page and device, with scores of 98–100.
+
+### Notes
+
+- The mobile homepage has the lowest performance score (90) because its Largest Contentful Paint is 3.7 s, which is above the 2.5 s "good" threshold. Lighthouse's mobile test simulates a throttled connection and a slower CPU. Layout shift is 0 and blocking time is minimal on all pages.
+- Accessibility is supported by semantic HTML, visible focus states, full keyboard navigation, alt text on images and WCAG AA colour contrast.
+
+### Desktop results (homepage and product page)
+![alt text](<Screenshot 2026-11-18 at 17.41.09.png>) 
+![alt text](<Screenshot 2026-11-18 at 17.41.44.png>)
+
+
+### Mobile results (homepage and product page)
+![alt text](<Screenshot 2026-11-18 at 17.42.57.png>) 
+![alt text](<Screenshot 2026-11-18 at 17.43.28.png>)
