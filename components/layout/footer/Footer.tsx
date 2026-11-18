@@ -1,6 +1,5 @@
 import Image from "next/image";
 import Link from "next/link";
-import Logo from "@/public/images/Type=Logo + Type Small, Color=White.svg";
 import type { FooterColumn } from "@/types/content";
 
 type FooterProps = {
@@ -12,7 +11,7 @@ export function Footer({ columns }: FooterProps) {
     <footer className="w-full bg-red px-5 py-8 text-white md:px-10 md:py-6 xl:px-32">
       <div className="flex flex-col items-start gap-8 md:flex-row md:justify-between">
         <Link href="/" aria-label="Octopus home" className="shrink-0">
-          <Image src={Logo} alt="" className="h-auto w-16" loading="eager" />
+          <Image src="/images/logo-white.svg" alt="" className="h-auto w-16" loading="eager" width={64} height={64} unoptimized />
         </Link>
 
         <div className="flex flex-col items-start gap-8 md:flex-row md:gap-12 lg:gap-16">

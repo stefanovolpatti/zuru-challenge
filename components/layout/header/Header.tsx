@@ -3,8 +3,6 @@
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import Logo from "@/public/images/Type=Logo + Type Large, Color=Red.svg";
-import LogoMobile from "@/public/images/Type=Logo, Color=Red.svg";
 import { Button } from "@/components/ui/button/Button";
 import type { LinkItem } from "@/types/content";
 
@@ -41,8 +39,8 @@ export function Header({ navLinks, cta }: HeaderProps) {
         className="relative flex items-center justify-between rounded-full bg-white px-5 py-2 shadow-md"
       >
         <Link href="/" aria-label="Octopus home" className="shrink-0">
-          <Image src={Logo} alt="" className="hidden h-7 w-auto md:block" loading="eager" />
-          <Image src={LogoMobile} alt="" className="block h-7 w-auto md:hidden" loading="eager" />
+          <Image src="/images/logo-red-large.svg" alt="" className="hidden h-7 w-auto md:block" loading="eager" width={64} height={64} unoptimized />
+          <Image src="/images/logo-red.svg" alt="" className="block h-7 w-auto md:hidden" loading="eager" width={64} height={64} unoptimized />
         </Link>
 
         {/* Full navigation, from 1200px up */}
