@@ -4,6 +4,12 @@ A demo of the Octopus consumer electronics site: the Homepage and the Countertop
 
 > This README is a living document and the source of truth for the project. It is updated whenever the architecture, the status or the AI usage changes.
 
+
+## Deployed version
+You can find the deployed website by Vercel on:
+
+https://zuru-challenge.vercel.app/
+
 ## Setup
 
 Requires Node.js 20.9 or newer.
@@ -51,7 +57,7 @@ Conventions: test behaviour, not markup; no snapshots; E2E stays limited to crit
 | Product Detail Page | Done (hero, feature grid, spec accordions, downloads, best-sellers carousel) |
 | Tests (component and end-to-end) | Done |
 | SEO and Open Graph tags | Not started |
-| Deployment and Lighthouse reports | Partially |
+| Deployment and Lighthouse reports | Done |
 
 ## Architecture
 
@@ -125,7 +131,6 @@ Why it is built this way:
 - **Product page:** the hero CTA was a `<button>` with no `href` (dead on click) — it now links to `/where-to-buy`. The page had no `<h1>`, the hero image forced `min-h-[900px]` over its aspect ratio, the grid mixed `lg:` columns with `md:` spans, and `DownloadsRow` had drifted inside the Specifications landmark. `ProductCard` also lost the speculative props (`titleAs`, `ctaLabel`, `ctaHref`, `children`) added for a reuse that was later reworked; only `cta` remains, because the feature grid calls it.
 - **Styles:** breakpoints were Tailwind's defaults and are now the brief's. Three button classes that repeated the same base were split into a base plus variants. Unused Geist font loading was removed.
 
-## Lighthouse results
 ## Lighthouse Results
 
 Audits were run with Chrome DevTools Lighthouse on the homepage and the product page, for both desktop and mobile.
