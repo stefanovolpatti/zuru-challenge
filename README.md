@@ -18,6 +18,28 @@ npm run dev
 
 Open http://localhost:3000. Other commands: `npm run build`, `npm run start`, `npm run lint`.
 
+## Testing
+
+Component tests (Vitest + Testing Library) sit next to the components they cover; the end-to-end test lives in `e2e/`. The e2e test runs in your installed Google Chrome (headed locally, headless when CI is set). If Chrome is missing, install it or run `npx playwright install chrome`.
+
+Then:
+
+```bash
+npm test          # unit + e2e
+npm run test:unit # Vitest only
+npm run test:e2e  # Playwright only, opens Chrome (builds and serves the production bundle)
+```
+
+What is covered and why:
+
+- `Accordion.test.tsx` — the open/close state machine: `aria-expanded` toggling, panel region linkage and `defaultOpen`. It is the interactive primitive behind every spec section.
+- `ProductCard.test.tsx` — name/description rendering, the `/products/[slug]` link, and the `cta={false}` variant used by the feature grid.
+- `ColourSelector.test.tsx` — swatch selection updates `aria-checked` and the visible label.
+- `lib/content.test.ts` — the data contract every page relies on: unique slugs, required fields, featured-first ordering.
+- `e2e/product-journey.spec.ts` — homepage → click the blender card → PDP, asserts the h1 and that the spec accordion toggles. The one user journey that must never break.
+
+Conventions: test behaviour, not markup; no snapshots; E2E stays limited to critical journeys; component tests colocated with the component.
+
 ## Status
 
 | Area | State |
@@ -27,7 +49,7 @@ Open http://localhost:3000. Other commands: `npm run build`, `npm run start`, `n
 | Best sellers carousel | Not started |
 | Hair Care section | Not started (no products in the data yet) |
 | Product Detail Page | Done (hero, feature grid, spec accordions, downloads); best-sellers carousel pending |
-| Tests (component and end-to-end) | Not started |
+| Tests (component and end-to-end) | Done |
 | SEO and Open Graph tags | Not started |
 | Deployment and Lighthouse reports | Not started |
 
@@ -42,6 +64,8 @@ components/
   layout/       Header, Footer
   sections/     page blocks: Banner, PageSection, CategorySection, ExploreCategories,
                 product-detail/ (ProductHero, ProductFeatureGrid, DownloadsRow)
+e2e/            Playwright end-to-end tests (homepage → PDP journey)
+*.test.tsx      component tests, colocated with the component they cover
 data/           all content as JSON: products, categories, home sections, site navigation
 lib/content.ts  the only module that reads data/
 types/          content types shared by data, lib and components
@@ -85,6 +109,7 @@ Why it is built this way:
 | Data layer | Claude Code designed and wrote the JSON files, the content types and `lib/content.ts`. |
 | Refactor | Claude Code rewrote the components and the page against the data layer (details below). |
 | Product detail page | Claude Code built the dynamic route, sections and JSON from the brief; the page layout was reworked by hand afterwards, then reviewed again (fixes listed below). |
+| Test suite | Claude Code proposed the Vitest + Playwright setup (unit vs e2e split, colocated tests) and wrote the initial tests and configs. |
 | README | Drafted by Claude Code, reviewed by me. |
 
 ### Where the AI corrected or rewrote my code
