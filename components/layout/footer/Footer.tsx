@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import Logo from "@/assets/images/Type=Logo + Type Small, Color=White.svg";
+import Logo from "@/public/images/Type=Logo + Type Small, Color=White.svg";
 import type { FooterColumn } from "@/types/content";
 
 type FooterProps = {

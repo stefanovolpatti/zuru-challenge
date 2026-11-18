@@ -3,8 +3,8 @@
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import Logo from "@/assets/images/Type=Logo + Type Large, Color=Red.svg";
-import LogoMobile from "@/assets/images/Type=Logo, Color=Red.svg";
+import Logo from "@/public/images/Type=Logo + Type Large, Color=Red.svg";
+import LogoMobile from "@/public/images/Type=Logo, Color=Red.svg";
 import { Button } from "@/components/ui/button/Button";
 import type { LinkItem } from "@/types/content";
 
