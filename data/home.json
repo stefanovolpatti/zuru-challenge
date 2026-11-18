@@ -1,6 +1,10 @@
 {
   "sections": [
     {
+      "id": "best-sellers",
+      "type": "best-sellers"
+    },
+    {
       "id": "kitchen",
       "type": "category",
       "category": "kitchen",

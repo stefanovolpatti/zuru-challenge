@@ -18,7 +18,7 @@
     "shortDescription": "A portable blender that blends straight into a cup you can take with you",
     "image": "/images/products/blender.png",
     "imageAlt": "Octopus portable blender",
-    "bestSeller": false
+    "bestSeller": true
   },
   {
     "id": "countertop-blender",
@@ -28,7 +28,7 @@
     "shortDescription": "A powerful blender that crushes ice and blends smooth with seven presets",
     "image": "/images/products/countertop-blender.png",
     "imageAlt": "Octopus countertop blender",
-    "bestSeller": false,
+    "bestSeller": true,
     "colours": [
       {
         "name": "Graphite",
@@ -103,7 +103,7 @@
     "shortDescription": "An outdoor camera that runs on solar power and records in 3K",
     "image": "/images/products/outdoor-camera.png",
     "imageAlt": "Octopus outdoor camera on its wall mount",
-    "bestSeller": false
+    "bestSeller": true
   },
   {
     "id": "video-doorbell",
@@ -123,7 +123,7 @@
     "shortDescription": "A slim power bank with the USB-C cable already built in",
     "image": "/images/products/power-bank.png",
     "imageAlt": "Octopus power bank with its built-in USB-C cable",
-    "bestSeller": false
+    "bestSeller": true
   },
   {
     "id": "power-board",

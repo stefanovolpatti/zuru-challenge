@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button/Button";
 import type { Product } from "@/types/content";
 
 /**
- * One card, four layouts. Everything the designs share (rounded surface,
+ * One card, five layouts. Everything the designs share (rounded surface,
  * title and description type, red pill button) lives here once. Only the
  * arrangement changes, and that is a set of classes per layout.
  */
@@ -12,7 +12,8 @@ export type ProductCardLayout =
   | "split" // text left, image right
   | "stacked" // image on top, text left below
   | "stacked-center" // text centered, image below
-  | "overlay"; // full-bleed photo, text on top
+  | "overlay" // full-bleed photo, text on top
+  | "showcase"; // mobile: image on top; desktop: text left, image right
 
 type LayoutClasses = { root: string; text: string; media: string };
 
@@ -36,6 +37,12 @@ const layouts: Record<ProductCardLayout, LayoutClasses> = {
     media: cn(base.media, "md:aspect-square"),
   },
   "stacked-center": base,
+  // Image on top on mobile; text left, image right from `md` up.
+  showcase: {
+    root: cn(base.root, "flex-col-reverse md:flex-row md:text-left"),
+    text: cn(base.text, "md:w-1/2 md:max-w-none md:p-12"),
+    media: cn(base.media, "md:aspect-auto md:w-1/2 md:self-stretch"),
+  },
   overlay: {
     root: cn(base.root, "md:flex-row md:items-center md:text-left"),
     text: cn(base.text, "md:relative md:z-10 md:p-16"),
@@ -48,10 +55,12 @@ export type ProductCardProps = {
   layout?: ProductCardLayout;
   /** Hide the call-to-action button. Defaults to showing it. */
   cta?: boolean;
+  /** Small red uppercase label rendered above the title, e.g. a category. */
+  eyebrow?: string;
   className?: string;
 };
 
-export function ProductCard({ product, layout = "split", cta = true, className }: ProductCardProps) {
+export function ProductCard({ product, layout = "split", cta = true, eyebrow, className }: ProductCardProps) {
   const classes = layouts[layout];
 
   return (
@@ -63,6 +72,11 @@ export function ProductCard({ product, layout = "split", cta = true, className }
       )}
     >
       <div className={classes.text}>
+        {eyebrow && (
+          <p className="mb-2 text-xs font-semibold uppercase tracking-[0.18em] text-red">
+            {eyebrow}
+          </p>
+        )}
         <h3 className="text-2xl font-medium text-neutral-900 md:text-3xl">{product.name}</h3>
         <p className="mt-3 text-neutral-600">{product.shortDescription}</p>
 

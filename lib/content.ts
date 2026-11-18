@@ -50,3 +50,8 @@ export function getProductBySlug(slug: string): Product | undefined {
 export function getAllProducts(): Product[] {
   return products;
 }
+
+/** Best-seller products in data order. */
+export function getBestSellers(): Product[] {
+  return products.filter((product) => product.bestSeller);
+}

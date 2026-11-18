@@ -56,7 +56,8 @@ export type BannerContent = {
 export type HomeSection =
   | { id: string; type: "category"; category: CategoryId; cta?: Cta }
   | ({ id: string; type: "banner" } & BannerContent)
-  | { id: string; type: "category-tiles"; title: string };
+  | { id: string; type: "category-tiles"; title: string }
+  | { id: string; type: "best-sellers" };
 
 export type FooterColumn = {
   title: string;

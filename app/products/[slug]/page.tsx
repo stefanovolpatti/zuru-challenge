@@ -5,8 +5,13 @@ import { Accordion } from "@/components/ui/accordion/Accordion";
 import { ProductHero } from "@/components/sections/product-detail/ProductHero";
 import { ProductFeatureGrid } from "@/components/sections/product-detail/ProductFeatureGrid";
 import { DownloadsRow } from "@/components/sections/product-detail/DownloadsRow";
-import { getAllProducts, getProductBySlug } from "@/lib/content";
+import { BestSellers } from "@/components/sections/best-sellers/BestSellers";
+import { getAllProducts, getBestSellers, getCategories, getProductBySlug } from "@/lib/content";
 import { Suspense } from "react";
+
+const categoryNames = Object.fromEntries(
+  getCategories().map((category) => [category.id, category.name])
+);
 
 export function generateStaticParams() {
   return getAllProducts().map((product) => ({ slug: product.slug }));
@@ -74,6 +79,12 @@ async function ProductDetails({
       )}
 
       <DownloadsRow downloads={product.downloads} />
+
+      <BestSellers
+        id="best-sellers"
+        products={getBestSellers()}
+        categoryNames={categoryNames}
+      />
     </div>
   );
 }

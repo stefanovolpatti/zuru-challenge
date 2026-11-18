@@ -46,9 +46,9 @@ Conventions: test behaviour, not markup; no snapshots; E2E stays limited to crit
 |---|---|
 | Homepage sections rendered from JSON | Done |
 | Header with collapsing menu, footer | Done |
-| Best sellers carousel | Not started |
+| Best sellers carousel | Done (home page top, product page bottom) |
 | Hair Care section | Not started (no products in the data yet) |
-| Product Detail Page | Done (hero, feature grid, spec accordions, downloads); best-sellers carousel pending |
+| Product Detail Page | Done (hero, feature grid, spec accordions, downloads, best-sellers carousel) |
 | Tests (component and end-to-end) | Done |
 | SEO and Open Graph tags | Not started |
 | Deployment and Lighthouse reports | Not started |
@@ -63,7 +63,8 @@ components/
                 Accordion, ColourSelector
   layout/       Header, Footer
   sections/     page blocks: Banner, PageSection, CategorySection, ExploreCategories,
-                product-detail/ (ProductHero, ProductFeatureGrid, DownloadsRow)
+                product-detail/ (ProductHero, ProductFeatureGrid, DownloadsRow),
+                best-sellers/ (BestSellers)
 e2e/            Playwright end-to-end tests (homepage → PDP journey)
 *.test.tsx      component tests, colocated with the component they cover
 data/           all content as JSON: products, categories, home sections, site navigation

@@ -1,7 +1,9 @@
 import { Banner } from "@/components/sections/banner/Banner";
 import { CategorySection } from "@/components/sections/category-section/CategorySection";
+import { BestSellers } from "@/components/sections/best-sellers/BestSellers";
 import { ExploreCategories } from "@/components/sections/explore-categories/ExploreCategories";
 import {
+  getBestSellers,
   getCategories,
   getCategory,
   getHomeSections,
@@ -9,9 +11,24 @@ import {
 } from "@/lib/content";
 import type { HomeSection } from "@/types/content";
 
+const categoryNames = Object.fromEntries(
+  getCategories().map((category) => [category.id, category.name])
+);
+
 /** Maps one entry of data/home.json to the component that renders it. */
 function renderSection(section: HomeSection) {
   switch (section.type) {
+    case "best-sellers":
+      return (
+        <BestSellers
+          key={section.id}
+          id={section.id}
+          products={getBestSellers()}
+          categoryNames={categoryNames}
+          className="p-4 lg:mx-32"
+        />
+      );
+
     case "category": {
       const category = getCategory(section.category);
       if (!category) return null;

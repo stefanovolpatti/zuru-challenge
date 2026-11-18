@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { getAllProducts, getProductBySlug, getProductsByCategory } from "./content";
+import { getAllProducts, getBestSellers, getProductBySlug, getProductsByCategory } from "./content";
 
 describe("content data", () => {
   it("finds the countertop blender by slug", () => {
@@ -29,5 +29,15 @@ describe("content data", () => {
     const kitchen = getProductsByCategory("kitchen");
     expect(kitchen.length).toBeGreaterThan(0);
     expect(kitchen[0].featured ?? false).toBe(true);
+  });
+
+  it("returns exactly the flagged best sellers", () => {
+    const bestSellers = getBestSellers();
+
+    expect(bestSellers.length).toBeGreaterThan(0);
+    expect(bestSellers.every((product) => product.bestSeller)).toBe(true);
+    expect(bestSellers.map((product) => product.slug).sort()).toEqual(
+      ["blender", "countertop-blender", "outdoor-camera", "power-bank"].sort()
+    );
   });
 });
