@@ -4,9 +4,9 @@ A demo of the Octopus consumer electronics site: the Homepage and the Countertop
 
 > This README is a living document and the source of truth for the project. It is updated whenever the architecture, the status or the AI usage changes.
 
-
 ## Deployed version
-You can find the deployed website by Vercel on:
+
+The site is deployed on Vercel:
 
 https://zuru-challenge.vercel.app/
 
@@ -26,9 +26,9 @@ Open http://localhost:3000. Other commands: `npm run build`, `npm run start`, `n
 
 ## Testing
 
-Component tests (Vitest + Testing Library) sit next to the components they cover; the end-to-end test lives in `e2e/`. The e2e test runs in your installed Google Chrome (headed locally, headless when CI is set). If Chrome is missing, install it or run `npx playwright install chrome`.
+Component tests (Vitest + Testing Library) sit next to the components they cover; the end-to-end test lives in `e2e/`. The e2e test runs in your installed Google Chrome (headed locally, headless when `CI` is set). If Chrome is missing, install it or run `npx playwright install chrome`.
 
-Then:
+Run:
 
 ```bash
 npm test          # unit + e2e
@@ -39,12 +39,12 @@ npm run test:e2e  # Playwright only, opens Chrome (builds and serves the product
 What is covered and why:
 
 - `Accordion.test.tsx` — the open/close state machine: `aria-expanded` toggling, panel region linkage and `defaultOpen`. It is the interactive primitive behind every spec section.
-- `ProductCard.test.tsx` — name/description rendering, the `/products/[slug]` link, and the `cta={false}` variant used by the feature grid.
+- `ProductCard.test.tsx` — name and description rendering, the `/products/[slug]` link, and the `cta={false}` variant used by the feature grid.
 - `ColourSelector.test.tsx` — swatch selection updates `aria-checked` and the visible label.
 - `lib/content.test.ts` — the data contract every page relies on: unique slugs, required fields, featured-first ordering.
-- `e2e/product-journey.spec.ts` — homepage → click the blender card → PDP, asserts the h1 and that the spec accordion toggles. The one user journey that must never break.
+- `e2e/product-journey.spec.ts` — homepage → click the blender card → PDP, asserts the h1 and that the spec accordion toggles. This is the one user journey that must never break.
 
-Conventions: test behaviour, not markup; no snapshots; E2E stays limited to critical journeys; component tests colocated with the component.
+Conventions: test behaviour, not markup; no snapshots; E2E stays limited to critical journeys; component tests are colocated with the component.
 
 ## Status
 
@@ -53,10 +53,11 @@ Conventions: test behaviour, not markup; no snapshots; E2E stays limited to crit
 | Homepage sections rendered from JSON | Done |
 | Header with collapsing menu, footer | Done |
 | Best sellers carousel | Done (home page top, product page bottom) |
-| Hair Care section | Not started (no products in the data yet) |
+| Hair Care video section | Not started |
 | Product Detail Page | Done (hero, feature grid, spec accordions, downloads, best-sellers carousel) |
 | Tests (component and end-to-end) | Done |
 | SEO and Open Graph tags | Not started |
+| Error and loading states | Not started |
 | Deployment and Lighthouse reports | Done |
 
 ## Architecture
@@ -88,13 +89,13 @@ Why it is built this way:
 - **Images are paths under `public/`.** JSON cannot hold static imports, and a path keeps "add a product" a data-only change. Cards and banners use `next/image` with `fill` inside fixed-ratio boxes, so nothing shifts while images load.
 - **Three component layers.** `ui` knows nothing about the site, `sections` compose `ui`, and `layout` wraps every page. This keeps the primitives reusable for the product page.
 - **Design tokens are defined once** in `app/globals.css` (`@theme`): colours and the two breakpoints from the brief, 810 px and 1200 px. Button styles are one base class plus one class per variant.
-- **Server components by default.** The only client components are the Header (menu state), the Accordion (open/close) and the ColourSelector (selected swatch). Pages stay server-rendered and read data directly.
-- **Pages compose, they don't layout.** `page.tsx` files only wire data to sections; layout lives in `components/sections/*`. A page that grows inline grids or hero markup wants a section component.
-- **One `<h1>` per page** (the product name on the PDP), `<h2>` per section, `<h3>` inside cards.
+- **Server components by default.** The only client components are the Header (menu state), the Accordion (open/close), the ColourSelector (selected swatch) and BestSellers (scroll position for the arrows). Pages stay server-rendered and read data directly.
+- **Pages compose, they don't lay out.** `page.tsx` files only wire data to sections; layout lives in `components/sections/*`. A page that grows inline grids or hero markup needs a section component.
+- **One `<h1>` per page** (the product name on the PDP), one `<h2>` per section, `<h3>` inside cards.
 - **Navigation CTAs are links.** `Button` with an `href` navigates; a bare `<button>` is only for JS actions.
 - **Breakpoints agree between container and children.** `lg:grid-cols-3` pairs with `lg:col-span-2`, never a bare `md:col-span-*` inside an `lg:` grid.
 - **Images get honest geometry.** Every `next/image` has an accurate `sizes`; the LCP (hero) image is `priority`; no fixed `min-h-*` fighting `aspect-*`, no duplicate hero images.
-- **Types match reality.** A field stays required unless there is a real fallback; optional fields spread `??` through every render site.
+- **Types match reality.** A field stays required unless there is a real fallback; optional fields use `??` at every render site.
 - **Shared components grow props only with a caller.** `ProductCard`'s `cta={false}` exists because the feature grid hides the button; speculative props (title level, CTA label/href, children slots) were removed until needed.
 - **Text on photos needs a contrast strategy.** Overlay text assumes a light, low-contrast photo; anything else uses the stacked card layout.
 
@@ -111,7 +112,6 @@ Why it is built this way:
 | Part | How AI was used |
 |---|---|
 | Brief analysis and plan | Claude Code read the brief and proposed the stack, structure and phases. |
-| Project scaffold, first components and page | TODO: confirm whether these were written by hand or with an AI tool. |
 | Code review | Claude Code reviewed my components for correctness, props, duplication and accessibility. |
 | Data layer | Claude Code designed and wrote the JSON files, the content types and `lib/content.ts`. |
 | Refactor | Claude Code rewrote the components and the page against the data layer (details below). |
@@ -123,13 +123,41 @@ Why it is built this way:
 
 - **Button:** a `<button>` was nested inside a link in the header and the product cards (invalid HTML, two tab stops). `Button` now renders as a link when it gets an `href`. The `type` prop became `variant`, and the nested ternary became a lookup map.
 - **Page:** 250 lines of hard-coded arrays and image imports in `app/page.tsx` moved to JSON. Cards that linked to the wrong product now build their link from the product slug.
-- **Banner:** CSS background images were replaced with `next/image`, an empty element and two overlapping colour props were removed.
+- **Banner:** CSS background images were replaced with `next/image`, and an empty element and two overlapping colour props were removed.
 - **Header:** the menu toggle had no icon and was invisible, there was no Escape handling, and the menu collapsed at 768 px instead of below 1200 px. All three are fixed.
 - **Cards:** `Card` duplicated `ProductCard` and carried a commented-out example; it is now a small `CategoryTile`. `ProductCard` takes a `product` instead of eight loose props, and classes that referenced an undefined `brand` colour are gone.
 - **Semantics:** section titles were `<h5>` and the page had no `<main>`; sections now use `<section>` with an `<h2>`, inside a `<main>`.
 - **Shared code:** three identical link types became one `LinkItem`. Header and Footer moved into the root layout so both pages share them.
-- **Product page:** the hero CTA was a `<button>` with no `href` (dead on click) — it now links to `/where-to-buy`. The page had no `<h1>`, the hero image forced `min-h-[900px]` over its aspect ratio, the grid mixed `lg:` columns with `md:` spans, and `DownloadsRow` had drifted inside the Specifications landmark. `ProductCard` also lost the speculative props (`titleAs`, `ctaLabel`, `ctaHref`, `children`) added for a reuse that was later reworked; only `cta` remains, because the feature grid calls it.
+- **Product page:** the hero CTA was a `<button>` with no `href` (dead on click); it now links to `/where-to-buy`. The page had no `<h1>`, the hero image forced `min-h-[900px]` over its aspect ratio, the grid mixed `lg:` columns with `md:` spans, and `DownloadsRow` had drifted inside the Specifications landmark. `ProductCard` also lost the speculative props (`titleAs`, `ctaLabel`, `ctaHref`, `children`) added for a reuse that was later reworked; only `cta` remains, because the feature grid calls it.
 - **Styles:** breakpoints were Tailwind's defaults and are now the brief's. Three button classes that repeated the same base were split into a base plus variants. Unused Geist font loading was removed.
+- **ProductCard (completed with AI):** Claude Code helped me finish the card as one component with five layouts (`split`, `stacked`, `stacked-center`, `overlay`, `showcase`). Each layout is a set of classes in a lookup map instead of a chain of conditionals, and the mobile arrangement is defined once in a shared base, so a layout only changes things from `md` upward. It also added the `eyebrow` prop (used by the best-sellers cards) and visually hidden text on the CTA, so that "Learn more" reads as "Learn more about <product>" for screen readers. Sizes and spacing still needed manual fixes and do not fully match the Figma file yet (see "What I would do with more time").
+- **BestSellers (completed with AI):** Claude Code helped me build the carousel with native scroll-snap instead of a carousel library, so touch, trackpad and the arrow buttons all work with very little code. The arrows are enabled or disabled from the scroll position, scroll by one card width plus the gap, and have `aria-label`s. The section is labelled by its heading and renders nothing when there are no products. It is a client component only because of the scroll state; the cards inside it are the shared `ProductCard` in the `showcase` layout.
+
+### Where I had to correct the AI's output
+
+- **Spacing and styling:** the AI often proposed margins, paddings and sizes that did not match the Figma file or the rest of the page. I adjusted them by hand, section by section. This is also a symptom of the missing spacing rules described in "What I would do with more time".
+- **Over-engineered logic:** the AI tended to make components more complex than needed. To reach the data a section had to show, it often passed props through too many layers of components and sub-components. I flattened these chains so that a section receives what it renders and nothing else.
+
+## Trade-offs
+
+- **JSON instead of a CMS.** Content in `data/` keeps the project simple and makes "add a product" a data-only change. The cost is that there is no editor UI, no validation beyond TypeScript and no preview. `lib/content.ts` is the single place to change when moving to a CMS or an API.
+- **Images as paths under `public/`.** This keeps the JSON free of static imports and the data layer simple. The cost is that Next.js cannot check at build time that a referenced image exists, and image sizes are not known until render.
+- **Scope over completeness.** I prioritised the Homepage, the product page, accessibility and the Lighthouse targets. The Hair Care video section, the SEO and Open Graph tags, and the error and loading states are not done (see Status).
+- **Few, focused tests.** The suite covers the interactive primitives, the data contract and the one critical user journey. I chose this over broad coverage so that the tests stay fast and meaningful. Many components and edge cases are not tested yet.
+- **Server components by default.** Pages stay light and fast, and only four components are client-side. The cost is that any new interactive feature needs an explicit client boundary.
+- **Mobile LCP on the homepage.** The performance score meets the required 90, but the LCP (3.7 s) is still above the "good" threshold. Reducing it further would have meant changing the hero image or the layout, which I left for later.
+
+## What I would do with more time
+
+- **Define the base spacing in one place.** Today spacing is declared in many components. I would add spacing tokens to `@theme` in `app/globals.css` and a few layout primitives (for example a `Container` and a vertical `Section` rhythm), so that pages and sections do not repeat margins and paddings.
+- **Implement the Hair Care video section.** It is the only Homepage block not started. It needs an accessible player (poster, captions, no autoplay with sound) and a lazy-loaded video to protect the LCP.
+- **Match `ProductCard` to the Figma file.** Its dimensions and spacing do not fully follow the design, and this shows in every place that uses it, such as the best-sellers carousel. I would fix the card first and then check each usage.
+- **Error and loading states.** Add `error.tsx` and `not-found.tsx` as fallback pages, and a `loading.tsx` skeleton for the product page.
+- **More tests.** Add more unit tests (`Header` menu and Escape key, `DownloadsRow`, `BestSellers`, `CategorySection` layouts) and more e2e journeys (menu navigation on mobile, unknown slug, keyboard-only use of the accordion).
+- **SEO and Open Graph.** Add `generateMetadata` per page, with title, description and Open Graph image taken from the JSON.
+- **Validate the data.** Add a Zod schema in `lib/content.ts`, so that a malformed JSON entry fails the build with a clear error instead of relying only on TypeScript and `content.test.ts`.
+- **Accessible carousel.** Add keyboard controls, `aria-roledescription` and `prefers-reduced-motion` support to the best-sellers carousel, and run automated accessibility checks (for example `axe` inside Playwright) to keep the 98–100 scores over time.
+- **CI.** Add a GitHub Action running `lint`, `test` and `build`, so that this living document is backed by automatic checks.
 
 ## Lighthouse Results
 
@@ -162,10 +190,11 @@ Audits were run with Chrome DevTools Lighthouse on the homepage and the product 
 - Accessibility is supported by semantic HTML, visible focus states, full keyboard navigation, alt text on images and WCAG AA colour contrast.
 
 ### Desktop results (homepage and product page)
-![alt text](<Screenshot 2026-11-18 at 17.41.09.png>) 
-![alt text](<Screenshot 2026-11-18 at 17.41.44.png>)
 
+![Lighthouse desktop report for the homepage](<Screenshot 2026-11-18 at 17.41.09.png>)
+![Lighthouse desktop report for the product page](<Screenshot 2026-11-18 at 17.41.44.png>)
 
 ### Mobile results (homepage and product page)
-![alt text](<Screenshot 2026-11-18 at 17.42.57.png>) 
-![alt text](<Screenshot 2026-11-18 at 17.43.28.png>)
+
+![Lighthouse mobile report for the homepage](<Screenshot 2026-11-18 at 17.42.57.png>)
+![Lighthouse mobile report for the product page](<Screenshot 2026-11-18 at 17.43.28.png>)
