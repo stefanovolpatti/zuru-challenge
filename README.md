@@ -105,6 +105,13 @@ Why it is built this way:
 2. Add an entry to `data/products.json`: `slug`, `category`, `image`, `imageAlt`, `shortDescription`, `bestSeller`. Optionally `colours`, `features`, `specs`, `downloads`.
 3. Run `npm run build`. The route is prerendered from the slug list; sections with no data simply don't render. No code changes needed.
 
+## Assumptions
+
+Where the brief or the Figma file was unclear, I made a reasonable assumption, noted it here and kept going. Both points below are on the product page, and both are easy to reverse if the design turns out to be intentional.
+
+- **Card text on tablet.** In the Figma file, some product page cards show only the CTA on tablet, without the title and description. I could not tell whether this is a design choice or a mistake in the file. Since it would hide important product information from the user, I kept the title and description visible at every breakpoint.
+- **Desktop and tablet layout shifted to the left.** In the Figma file, the desktop and tablet layouts of the product page sit to the left and leave a lot of empty space on the right. This is not consistent with the Homepage and looks as if content is missing. I assumed it was not intended and used one unified layout, where the cards take all the available width.
+
 ## How AI tools were used
 
 **Tool:** Claude Code (Anthropic), used as a planning and pair-programming assistant.
